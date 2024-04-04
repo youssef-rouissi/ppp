@@ -1,0 +1,27 @@
+version: "2.0"
+
+services: 
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - 8000:8000
+    volumes: 
+      - .:/app
+      - '/app/node_modules'
+    depends_on: 
+      - mysq
+  
+  mysq:
+    image: mysql:8.0
+    ports:
+      - 33060:33060
+
+    environment: 
+      - MYSQL_DATABASE=test_db
+      - MYSQL_USER=dan
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=aa
+
+    

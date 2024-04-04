@@ -8,7 +8,7 @@ const {executeQuery} = require("../Models/ResumeBuilderDataBase");
 
 
 async function projectExists(projectId) {
-    let query = connection.format('SELECT * FROM project WHERE id = ? ;',[projectId]);
+    let query = connection.format('SELECT * FROM Project WHERE id = ? ;',[projectId]);
     let result = await executeQuery(query);
     return (result.length>0);
 }
@@ -21,9 +21,9 @@ async function projectExists(projectId) {
 async function createProject (project){
     console.log(`Attempting to insert ${JSON.stringify(project.snapshot.Orders)}`);
 
-    let snapQuery = connection.format('INSERT INTO SNAPSHOT SET ?;',Snapshot.sanitize(project.snapshot));
-    let query  = connection.format('INSERT INTO project SET ? ;',Project.sanitize(project));
-    let Orders = connection.format('INSERT INTO ORDERS SET ?;', project.snapshot.Orders);
+    let snapQuery = connection.format('INSERT INTO Snapshot SET ?;',Snapshot.sanitize(project.snapshot));
+    let query  = connection.format('INSERT INTO Project SET ? ;',Project.sanitize(project));
+    let Orders = connection.format('INSERT INTO Orders SET ?;', project.snapshot.Orders);
     await executeQuery(query);
     await executeQuery(snapQuery);
     await executeQuery(Orders);
@@ -35,7 +35,7 @@ async function createProject (project){
  * @return {Promise<Project[]>}
  */
 async function getSimpleProjectsForUserById (userId){
-    let query = connection.format('SELECT * FROM project WHERE userId = ? ;', [userId]);
+    let query = connection.format('SELECT * FROM Project WHERE userId = ? ;', [userId]);
     // it's okay if he doesn't have any project, no exception needed
     return (await executeQuery(query));
 }
@@ -46,7 +46,7 @@ async function getSimpleProjectsForUserById (userId){
  * @return {Promise<User>}
  */
 async function  getSimpleProjectById(projectId){
-    let query  = connection.format('SELECT * FROM project WHERE id = ? ;', [projectId]);
+    let query  = connection.format('SELECT * FROM Project WHERE id = ? ;', [projectId]);
     let result = await executeQuery(query) ;
     if (result.length<=0)
         throw new Error("No Project Found For this id!")
@@ -111,7 +111,7 @@ async function updateSnapshotFieldForEnumerable (projectId,fieldName,fieldValue,
    return await executeQuery(query);
 }
 async function updateSnapshotField (projectId,fieldName,fieldValue){
-    let query = connection.format(`UPDATE snapshot SET ${connection.escapeId(fieldName)} = ? WHERE projectId=?`,[fieldValue,projectId]);
+    let query = connection.format(`UPDATE Snapshot SET ${connection.escapeId(fieldName)} = ? WHERE projectId=?`,[fieldValue,projectId]);
     return await executeQuery(query);
 }
 async function deleteEnumerableForProject(projectId,entryName) {
@@ -123,7 +123,7 @@ async function insertNewEnumerable(entryName, enumData) {
      return await executeQuery(insertEnum);
 }
 async function updateSnapshotForProject(projectId, snapshot) {
-    let updateSnapQuery = connection.format(`UPDATE snapshot SET ? WHERE projectId=? ;`, [snapshot, projectId]);
+    let updateSnapQuery = connection.format(`UPDATE Snapshot SET ? WHERE projectId=? ;`, [snapshot, projectId]);
     return await executeQuery(updateSnapQuery);
 }
 async function getNextTag(projectId, entryName){

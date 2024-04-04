@@ -1,5 +1,4 @@
 FROM node:latest
-LABEL authors="Omar"
 
 WORKDIR /app
 COPY . .

@@ -6,7 +6,7 @@ class enumerableList  {
     ProfessionalExp = EnumeData.ProfessionalExp;
     Language = EnumeData.Language;
     Skill = EnumeData.Skill;
-    Interest =  EnumeData.Interest;
+    interest =  EnumeData.interest;
 }
 
 class Snapshot extends enumerableList  {

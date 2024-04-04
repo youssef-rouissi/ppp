@@ -27,6 +27,10 @@ app.use(badRoute);
 
 const PORT = process.env.PORT?process.env.PORT:8000;
 app.listen(PORT, async() => {
+    for (let i = 1; i <= 31256; i++) {
+        console.log(i);
+    }
+    
     console.log("Connecting to database and checking tables");
     let res = await dbContext.createTables();
     console.log(`Server is running on port ${PORT}.
