@@ -27,7 +27,7 @@ app.use(badRoute);
 
 const PORT = process.env.PORT?process.env.PORT:8000;
 app.listen(PORT, async() => {
-    for (let i = 1; i <= 31256; i++) {
+    for (let i = 1; i <= 100; i++) {
         console.log(i);
     }
     

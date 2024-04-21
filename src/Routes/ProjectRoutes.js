@@ -74,7 +74,7 @@ router.post("/project/info",authorize,injectProject,async (req,res)=>{
 
 })
 
-router.post("/project/image",authorize,injectProject,notImplemented) ;
+router.post("/project/image",authorize,injectProject,notImplemented);
 
 router.delete("/project/info",authorize,injectProject,notImplemented) ;
 router.delete("/project",authorize,injectProject,async (req,res)=>{

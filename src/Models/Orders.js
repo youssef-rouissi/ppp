@@ -6,7 +6,7 @@ class Orders {
     ProfessionalExp ;
     Language  ;
     Skill ;
-    Interest ;
+    interest ;
     projectId;
     constructor(projectId) {
         this.projectId=projectId;
